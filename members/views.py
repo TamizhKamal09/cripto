@@ -385,7 +385,18 @@ def total_amount(request):
 
 def profile(request):
     current_user = request.user  # Get the current user
+    current_user_id = current_user.id
+    current_user_name = current_user.username
     print(current_user.id, "<-------------------------- = current user id user")
+    if request.method == 'POST':
+        amount = request.POST.get('amount')
+        print(amount,"0 amount amount amount 00000000000000000000000000000000000000000000")
+        Account_Detils.objects.create(
+            username=current_user_name,
+            user_id=current_user_id,
+            cripto_amount=amount,
+        )
+        
     user = User.objects.filter(id=current_user.id).first()
     total = total_amount(request)
     return render(request, 'profile.html', {'user': user,"amount":total})
@@ -394,7 +405,6 @@ def profile(request):
 
 
 def cripto(request):
-    print("000000000000000000000000000000000000000000000")
     current_user = request.user  # Get the current user
     print(current_user.id, "0000000000000000000000")
     user_name = current_user.username

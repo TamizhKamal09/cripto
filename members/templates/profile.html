@@ -819,7 +819,10 @@
     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
 
-
+  /* Style for the input field */
+  .collapsible-input {
+            display: none;
+        }
 </style>
 
 <body>
@@ -931,7 +934,7 @@
 						<h2>{{user.username}}</h2>
 						<p>{{user.email}}</p>
 					</div>
-					<ul class="card__info">
+					<!-- <ul class="card__info">
 						<li>
 							<span class="card__info__stats">172</span>
 							<span>posts</span>
@@ -944,16 +947,30 @@
 							<span class="card__info__stats">20</span>
 							<span>following</span>
 						</li>
-					</ul>
+					</ul> -->
 					<div class="card__action">
-						<button class="trigger">Click the modal!</button>
-						<button class="card__action__button card__action--message">message</button>
+						<button class="trigger">Check With Your Amount!</button>
+						
 					</div>
 					<!-- <button class="triggeFsreer">Click the modal!</button> -->
 					<div class="modal">
 						<div class="modal-content">
 							<span class="close-button">×</span>
-							<h1>Add amount!</h1><br><br>
+							<h1>Add amount!</h1><button onclick="toggleInput()">Click me</button>
+
+							<form method="POST">
+								{% csrf_token %}
+							<div class="collapsible-input">
+								<br>
+								<input type="text" class="form-control" name="amount" pattern="[0-9]*" title="Please enter your amount" required>
+								<!-- <button type="submit" class="card__action__button card__action--message">Submit</button> -->
+								<br>
+								<br>
+								
+								<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+								
+							</div>
+						</form>
 
 							<br>
 							<h2>Your amount is :  {{amount}}  /-</h2>
@@ -962,7 +979,16 @@
 
 				</div>
 			</main>
-
+			<script>
+				 function toggleInput() {
+        var input = document.querySelector(".collapsible-input");
+        if (input.style.display === "none") {
+            input.style.display = "block";
+        } else {
+            input.style.display = "none";
+        }
+    }
+			  </script>
 
 
 
