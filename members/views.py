@@ -1,4 +1,7 @@
 import datetime
+import hashlib
+import logging
+import pdb
 from django.db import IntegrityError
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -9,7 +12,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from members.models import Account_Detils, User, chat_messagers
+from members.models import Account_Detils, Block, User, chat_messagers
+from django.utils import timezone
 
 def login_view(request):
     if request.method == 'POST':
@@ -182,32 +186,150 @@ def chat_view(request):
 #     return render(request, 'message.html', {'user': user})
 
 
+# def message(request, id):
+#     user = User.objects.filter(id=id).first()
+#     print(user,"<-------------------- user")
+#     current_user = request.user
+#     current_user_id = current_user.id
+#     print(current_user.id, "<------------------------------- current_user.id")
+#     print(current_user.username, "<------------------------------- current_user.username")
+#     current_user_username = current_user.username
+#     total = total_amount(request)
+    
+#     if request.method == 'POST':
+#         user = User.objects.filter(id=id).first()
+#         print(user,"<------------------- user2")
+        
+#         if user:
+#             user_name_db = user.username
+#         else:
+#             user_name_db = None
+#             print("User Name Mismatching... Try another id...")
+        
+        
+#         print(user_name_db,"<------------------ user_name_db")
+#         amount = request.POST.get('amount')
+#         print(amount,"<------------------ amount")
+        
+#         if amount is not None:
+#             try:
+#                 amount = int(amount)
+#             except ValueError:
+#                 print("Invalid amount. Please enter a valid positive integer.")
+#                 return redirect('cripto')
+            
+#             if amount > 0:
+#                 print(total,"<----------------- total")
+#                 updated_amount = total - amount
+#                 print(updated_amount,"<----------------- updated_amount")
+#                 if updated_amount >= 0:
+#                     Account_Detils.objects.create(username=current_user_username, user_id=current_user_id, cripto_amount = -amount)
+#                     Account_Detils.objects.create(username=user_name_db, user_id=id, cripto_amount=amount)
+#                     print("Data saved successfully")
+#                     return JsonResponse({'success': True})
+#                 else:
+#                     print("Your account amount is low")
+#                     return JsonResponse({'success': False, 'error_message': 'Your account amount is low'})
+#             else:
+#                 print("Amount should be a positive integer.")
+#         else:
+#             print("Amount is missing in the POST data.")
+    
+#     return render(request, 'message.html', {'user': user})
+
+
 def message(request, id):
     user = User.objects.filter(id=id).first()
+    print(user, "<-------------------- user")
     current_user = request.user
+    current_user_id = current_user.id
+    print(current_user.id, "<------------------------------- current_user.id")
+    print(current_user.username, "<------------------------------- current_user.username")
+    current_user_username = current_user.username
     total = total_amount(request)
-    
     if request.method == 'POST':
         user = User.objects.filter(id=id).first()
+        print(user, "<------------------- user2")
+
         if user:
             user_name_db = user.username
         else:
             user_name_db = None
             print("User Name Mismatching... Try another id...")
-        
+
+        print(user_name_db, "<------------------ user_name_db")
         amount = request.POST.get('amount')
-        
+        print(amount, "<------------------ amount")
+
         if amount is not None:
             try:
                 amount = int(amount)
             except ValueError:
                 print("Invalid amount. Please enter a valid positive integer.")
                 return redirect('cripto')
-            
+
             if amount > 0:
+                print(total, "<----------------- total")
                 updated_amount = total - amount
+                print(updated_amount, "<----------------- updated_amount")
                 if updated_amount >= 0:
-                    Account_Detils.objects.create(username=user_name_db, user_id=id, cripto_amount=updated_amount)
+                    try:
+                        last_block = Block.objects.latest('timestamp')
+                    except Block.DoesNotExist:
+                        last_block = None
+                    print(last_block, "<-------------- last_block 11111111111")
+
+                    if last_block:
+                        previous_hash = last_block.compute_hash()
+                    else:
+                        # Handle the case when there's no previous block, such as the genesis block
+                        previous_hash = ''
+                    print(previous_hash, "<-------------- previous_hash 2222222222222222222")
+
+                    if last_block is not None:
+                        last_proof = last_block.nonce
+                    else:
+                        # Handle the case when there are no blocks yet (e.g., for the genesis block)
+                        last_proof = 0
+                    nonce=proof_of_work(last_proof),
+                    nonce = nonce[0]
+                    
+                    
+                    print(current_user_id,"< -------------------- current_user_id")
+                    print(previous_hash,"< -------------------- previous_hash")
+                    print(timezone.now(),"< -------------------- timezone.now()")
+                    print(nonce,"< -------------------- nonce")
+                    print(amount,"< -------------------- amount")
+                    
+                    # Block.objects.create(index=current_user_id,timestamp=timezone.now(),previous_hash=previous_hash,data=amount,nonce=nonce)
+                    
+                    new_block = Block(
+                        index=current_user_id,  # Set the index based on your logic
+                        timestamp=timezone.now(),
+                        previous_hash=previous_hash,
+                        data=amount,
+                        nonce=nonce
+                    )
+                    
+                    try:
+                        new_block.save()
+                    except:
+                        pass
+
+                    
+                    print("Transaction saved as a new block in the blockchain")
+                    account_details = Account_Detils.objects.create(
+                        username=current_user_username,
+                        user_id=current_user_id,
+                        cripto_amount=-amount,
+                    )
+                    # account_details.save()
+
+                    Account_Detils.objects.create(
+                        username=user_name_db,
+                        user_id=id,
+                        cripto_amount=amount,
+                    )
                     print("Data saved successfully")
                     return JsonResponse({'success': True})
                 else:
@@ -217,8 +339,25 @@ def message(request, id):
                 print("Amount should be a positive integer.")
         else:
             print("Amount is missing in the POST data.")
-    
+
     return render(request, 'message.html', {'user': user})
+
+
+def proof_of_work(last_proof, difficulty=4):
+    proof = 0
+    while not is_valid_proof(last_proof, proof, difficulty):
+        proof += 1
+    return proof
+
+def is_valid_proof(last_proof, proof, difficulty):
+    guess = f"{last_proof}{proof}".encode()
+    guess_hash = hashlib.sha256(guess).hexdigest()
+    return guess_hash[:difficulty] == '0' * difficulty
+
+
+def block_chain(request):
+    data = Block.objects.all()
+    return render(request, 'block_chain.html',{"data":data})
 
 
 def timer(request):

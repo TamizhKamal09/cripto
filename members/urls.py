@@ -13,6 +13,7 @@ urlpatterns = [
             path('chat_view/', views.chat_view, name='chat_view'),
             path('timer', views.timer, name='timer'),     
             path('cripto', views.cripto, name='cripto'),     
+            path('block_chain', views.block_chain, name='block_chain'),     
             path('profile', views.profile, name='profile'),     
             path('message/<int:id>/',views.message,name='message'),
             # path('dash',views.dash,name='dash'),

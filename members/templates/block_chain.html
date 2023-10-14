@@ -13,101 +13,40 @@
 		href="style.css">
 	<link rel="stylesheet"
 		href="responsive.css">
-        
-        <link rel="stylesheet" type="text/css" href="styles.css">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <style>
   /* Main CSS Here */
 
-/* Reset some default styles */
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+
+  /* styles.css */
+table {
+    border-collapse: collapse;
+    width: 100%;
 }
 
-/* Style the chat container */
-.chat-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+table, th, td {
+    border: 1px solid #ddd;
 }
 
-/* Style the chat box */
-.chat {
-    width: 300px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+th, td {
+    padding: 12px;
+    text-align: left;
 }
 
-/* Style the chat header */
-.chat-header {
-    background-color: #007bff;
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+th {
+    background-color: #333;
     color: white;
-    padding: 10px;
-    text-align: center;
 }
-
-/* Style chat messages */
-.chat-messages {
-    padding: 10px;
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-/* Style chat message bubbles */
-.message {
-    padding: 8px 12px;
-    margin: 4px;
-    border-radius: 8px;
-    max-width: 70%;
-}
-
-/* Style received messages */
-.received {
-    background-color: #f1f0f0;
-    align-self: flex-start;
-}
-
-/* Style sent messages */
-.sent {
-    background-color: #007bff;
-    color: white;
-    align-self: flex-end;
-}
-
-/* Style chat input */
-.chat-input {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #f1f0f0;
-}
-
-/* Style input field */
-.chat-input input {
-    flex: 1;
-    border: none;
-    padding: 8px;
-    border-radius: 20px;
-    margin-right: 10px;
-}
-
-/* Style send button */
-.chat-input button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 16px;
-    cursor: pointer;
-}
-
-
 
 
 @import url(
@@ -605,164 +544,7 @@ border-radius: 4px;
 }
 }
 
-
-/* pay style */
-
-
-/*Filename: style.css File */
-* {
-	margin: 0;
-	padding: 0;
-}
-
-body {
-	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-	font-weight: bold;
-}
-
-.container {
-	height: 600px;
-	width: 400px;
-	background-image: linear-gradient(#1e6b30, #308d46);
-	top: 55%;
-	left: 50%;
-	position: absolute;
-	transform: translate(-50%, -50%);
-	position: absolute;
-	border-bottom-left-radius: 180px;
-	border-top-right-radius: 150px;
-}
-
-.main-content {
-	height: 205px;
-	background-color: #1b9236;
-	border-bottom-left-radius: 90px;
-	border-bottom-right-radius: 80px;
-	border-top: #1e6b30;
-}
-
-.text {
-	text-align: center;
-	font-size: 300%;
-	text-decoration: aliceblue;
-	color: aliceblue;
-}
-
-.course {
-	color: black;
-	font-size: 25px;
-	font-weight: bolder;
-}
-
-.centre-content {
-	height: 180px;
-	/* margin: -70px 30px 20px; */
-	color: aliceblue;
-	text-align: center;
-	font-size: 20px;
-	border-radius: 25px;
-	padding-top: 0.5px;
-	background-image: linear-gradient(#1e6b30, #308d46);
-}
-
-.centre-content-h1 {
-	padding-top: 30px;
-	padding-bottom: 30px;
-	font-weight: normal;
-}
-
-.price {
-	font-size: 60px;
-	margin-left: 5px;
-	bottom: 15px;
-	position: relative;
-}
-
-.pay-now-btn {
-	cursor: pointer;
-	color: #fff;
-	height: 50px;
-	width: 290px;
-	border: none;
-	margin: 5px 30px;
-	background-color: rgb(71, 177, 61);
-	position: relative;
-}
-
-.card-details {
-	background: rgb(8, 49, 14);
-	color: rgb(225, 223, 233);
-	margin: 10px 30px;
-	padding: 10px;
-	/* border-bottom-left-radius: 80px; */
-}
-
-.card-details p {
-	font-size: 15px;
-}
-
-.card-details label {
-	font-size: 15px;
-	line-height: 35px;
-}
-
-.submit-now-btn {
-	cursor: pointer;
-	color: #fff;
-	height: 30px;
-	width: 240px;
-	border: none;
-	margin: 5px 30px;
-	background-color: rgb(71, 177, 61);
-}
-
-
-
 </style>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelector('form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-
-            fetch(this.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    Swal.fire({
-								title: 'Success',
-								text: 'Data saved successfully',
-								icon: 'success',
-								showCancelButton: true, // Show a "Cancel" button
-								confirmButtonText: 'OK', // Change the "OK" button text
-								}).then((result) => {
-								if (result.isConfirmed) {
-									// Redirect to the desired URL when the "OK" button is clicked
-									window.location.href = '/cripto';
-								} else {
-									// Handle any other actions or cancel button click
-									console.error('Action canceled');
-								}
-								});
-					
-                } else {
-                    Swal.fire('Error', data.error_message, 'error');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-    });
-</script>
-
 <body>
 
 	<!-- for header part -->
@@ -846,6 +628,23 @@ body {
 							alt="blog">
 							<h3> Cripto</h3>
 					</div>
+
+					<!-- <div class="nav-option option5">
+						<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png"
+							class="nav-img"
+							alt="blog">
+						<h3> Profile</h3>
+					</div>
+
+					<div class="nav-option option6">
+						<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/4.png"
+							class="nav-img"
+							alt="settings">
+						<h3> Settings</h3>
+					</div> -->
+
 					<div class="nav-option logout" onclick="window.location.href = '/login_view';">
 						<img src=
 "https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
@@ -874,108 +673,38 @@ body {
 
 		<!-- <h1>timer set work in progress</h1> -->
 
-        <!-- <div class="chat-container">
-            <div class="chat">
-                <div class="chat-header">
+    
+        <div class="container">
+            <h1>Crypto Trasaction History Table</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Amount</th>
+                        <th>Nonce</th>
+                        <th>Transaction Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.data}}</td>
+                        <td>{{i.nonce}}</td>
+                        <td>{{i.hash}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-                    <h2>Chat with {{user.username}}</h2>
-                </div>
-                <div class="chat-messages">
-                    <div class="message received">
-                        <p>Hello!</p>
-                    </div>
-                    <div class="message sent">
-                        <p>Hi there!</p>
-                    </div>
-                    
-                </div>
-                <div class="chat-input">
-                    <input type="text" placeholder="Type your message...">
-                    <button>Send</button>
-                </div>
-            </div>
-        </div> -->
+
+
         
+
+           
         
-		<div class="container">
-			<div class="centre-content"><br>
-				<h1 class="price"><h1 id="result">RS/-</h1></h1>
-				<p class="course">
-					Pay Cripto Amount  
-					<br>
-				<h1 class="price">{{user.username}}</h1>
-				</p>
-			</div>
-	
-	<br>
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-			document.querySelector('form').addEventListener('submit', function (e) {
-				e.preventDefault();
-				
-				const formData = new FormData(this);
-	
-				fetch(this.action, {
-					method: 'POST',
-					body: formData,
-					headers: {
-						'X-CSRFToken': formData.get('csrfmiddlewaretoken')
-					}
-				})
-				.then(response => response.json())
-				.then(data => {
-					if (data.success) {
-											
-					Swal.fire({
-					title: 'Success',
-					text: 'Data saved successfully',
-					icon: 'success',
-					showCancelButton: true, // Show a "Cancel" button
-					confirmButtonText: 'OK', // Change the "OK" button text
-					}).then((result) => {
-					if (result.isConfirmed) {
-						// Redirect to the desired URL when the "OK" button is clicked
-						window.location.href = '/cripto';
-					} else {
-						// Handle any other actions or cancel button click
-						console.error('Action canceled');
-					}
-					});
-						
-					} else {
-						Swal.fire('Error', data.error_message, 'error');
-					}
-				})
-				.catch(error => {
-					console.error('Error:', error);
-				});
-			});
-		});
-	</script>
-	
-	<br>
-	<br>
-	<br>
-	<form method="POST" >
-		{% csrf_token %}
-			<div class="card-details">
-				<p style="text-align: center;">Pay Cripto</p>
-				<br />
-				
-
-				<div class="date-number">
-					<label>Amount</label>
-					<input type="text" name="amount" id="textbox_id" class="date-number-field" oninput="handleValueChange()" required>
-				</div>
-				<button type="submit"
-						class="submit-now-btn">
-					submit
-				</button>
-			</div>
-		</form>
-
-		</div>
-
+           
 			
 		</div>
 	</div>
